@@ -26,7 +26,7 @@ var MarkdownEditor = React.createClass({
       // url encode it
       var UriEncodedValue = window.encodeURIComponent(base64EncodedValue);
       // set it as the url
-      window.location.href = window.location.origin + '?s=' + UriEncodedValue;
+      window.location.href = window.location.origin + window.location.pathname + '?s=' + UriEncodedValue;
 
       this.setState({ editor: false });
     },
