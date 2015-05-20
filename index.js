@@ -5,10 +5,13 @@ var React = require('react');
 var Marked = require('marked');
 
 function getMarkdownState(){
+  var markdownFromQuery = '# Click to create';
   var queryString = url.parse(window.location.href).query;
-  var queryObject = querystring.parse(queryString)
-  var valueString = queryObject.s.replace('/', '');
-  var markdownFromQuery =  window.atob(valueString);
+  if(queryString){
+    var queryObject = querystring.parse(queryString)
+    var valueString = queryObject.s.replace('/', '');
+    markdownFromQuery =  window.atob(valueString);
+  }
   return {
     editor: false,
     value: markdownFromQuery
@@ -26,7 +29,7 @@ var MarkdownEditor = React.createClass({
       // url encode it
       var UriEncodedValue = window.encodeURIComponent(base64EncodedValue);
       // set it as the url
-      window.location.href = window.location.origin + '?s=' + UriEncodedValue;
+      window.location.href = window.location.origin + window.location.pathname + '?s=' + UriEncodedValue;
 
       this.setState({ editor: false });
     },
