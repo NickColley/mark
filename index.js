@@ -5,10 +5,13 @@ var React = require('react');
 var Marked = require('marked');
 
 function getMarkdownState(){
+  var markdownFromQuery = '# Click to create';
   var queryString = url.parse(window.location.href).query;
-  var queryObject = querystring.parse(queryString)
-  var valueString = queryObject.s.replace('/', '');
-  var markdownFromQuery =  window.atob(valueString);
+  if(queryString){
+    var queryObject = querystring.parse(queryString)
+    var valueString = queryObject.s.replace('/', '');
+    markdownFromQuery =  window.atob(valueString);
+  }
   return {
     editor: false,
     value: markdownFromQuery
